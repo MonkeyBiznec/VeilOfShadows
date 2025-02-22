@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.monkeybiznec.veilshadows.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "veilshadows.refmap.json",
+  "mixins": [
+
+  ],
+  "client": [
+    "client.ChannelAccessor",
+    "client.ChannelHandleAccessor",
+    "client.PostChainMixin",
+    "client.SoundEngineMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
