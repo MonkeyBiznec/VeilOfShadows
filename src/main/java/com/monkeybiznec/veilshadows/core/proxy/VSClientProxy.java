@@ -3,30 +3,41 @@ package com.monkeybiznec.veilshadows.core.proxy;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.monkeybiznec.veilshadows.VeilOfShadows;
+import com.monkeybiznec.veilshadows.client.render.post.PostEffectManager;
+import com.monkeybiznec.veilshadows.client.render.post.PostProcessor;
+import com.monkeybiznec.veilshadows.client.render.shader.VSInternalShaders;
+import com.monkeybiznec.veilshadows.core.util.ResourceUtils;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterShadersEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.function.Consumer;
 
 public class VSClientProxy extends VSCommonProxy {
+    @SuppressWarnings("removal")
     @Override
     public void clientInitialize() {
         super.clientInitialize();
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(this::onRegisterShaders);
+        PostEffectManager.initAll();
+        PostProcessor.getInstance().initialize();
     }
 
-    private void onRegisterShaders(RegisterShadersEvent pEvent) {
+    private void onRegisterShaders(RegisterShadersEvent event) {
 
     }
 
-    private void registerShader(@NotNull RegisterShadersEvent pEvent, String pPath, VertexFormat pVertexFormat, Consumer<ShaderInstance> onLoaded) {
+    @SuppressWarnings("CallToPrintStackTrace")
+    private void registerShader(@NotNull RegisterShadersEvent event, String path, VertexFormat vertexFormat, Consumer<ShaderInstance> onLoaded) {
         try {
-            pEvent.registerShader(new ShaderInstance(pEvent.getResourceProvider(), new ResourceLocation(VeilOfShadows.ID, "shader_" + pPath), pVertexFormat), onLoaded);
+            event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceUtils.modLoc("shader_" + path), vertexFormat), onLoaded);
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
-
 }

@@ -1,0 +1,24 @@
+{
+  "targets": [
+    "swap",
+    "temp"
+  ],
+  "passes": [
+    {
+      "name": "veilshadows:red_effect",
+      "intarget": "minecraft:main",
+      "outtarget": "temp"
+    },
+    {
+      "name": "blit",
+      "intarget": "temp",
+      "outtarget": "minecraft:main",
+      "uniforms": [
+        {
+          "name": "ColorModulate",
+          "values": [ 1.0, 0.0, 0.0, 1.0 ]
+        }
+      ]
+    }
+  ]
+}

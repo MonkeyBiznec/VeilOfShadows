@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,16 +24,18 @@ import java.util.Map;
 @Mixin(SoundEngine.class)
 public class SoundEngineMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Options;getSoundSourceVolume(Lnet/minecraft/sounds/SoundSource;)F", ordinal = 0), method = "tickNonPaused", locals = LocalCapture.CAPTURE_FAILHARD)
-    public void onTickNonPaused(CallbackInfo ci, Iterator<Map.Entry<SoundInstance, ChannelAccess.ChannelHandle>> iterator, Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry, ChannelAccess.@NotNull ChannelHandle channelHandle, SoundInstance soundInstance) {
+    public void onTickNonPaused(CallbackInfo ci, Iterator<Map.Entry<SoundInstance, ChannelAccess.ChannelHandle>> iterator, Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry, ChannelAccess.@NotNull ChannelHandle channelHandle, @NotNull SoundInstance soundInstance) {
         Channel channel = ((ChannelHandleAccessor) channelHandle).getChannel();
-        if (channel != null) {
-            int source = ((ChannelAccessor) channel).getSource();
-            if (source > 0) {
-                int filter = EXTEfx.alGenFilters();
-                EXTEfx.alFilteri(filter, EXTEfx.AL_FILTER_TYPE, EXTEfx.AL_FILTER_LOWPASS);
-                EXTEfx.alFilterf(filter, EXTEfx.AL_LOWPASS_GAIN, 0.5f);
-                EXTEfx.alFilterf(filter, EXTEfx.AL_LOWPASS_GAINHF, 0.1f);
-                AL10.alSourcei(source, EXTEfx.AL_DIRECT_FILTER, filter);
+        if (soundInstance.getSource() != SoundSource.MASTER) {
+            if (channel != null) {
+                int source = ((ChannelAccessor) channel).getSource();
+                if (source > 0) {
+                    int filter = EXTEfx.alGenFilters();
+                    EXTEfx.alFilteri(filter, EXTEfx.AL_FILTER_TYPE, EXTEfx.AL_FILTER_LOWPASS);
+                    EXTEfx.alFilterf(filter, EXTEfx.AL_LOWPASS_GAIN, 0.5f);
+                    EXTEfx.alFilterf(filter, EXTEfx.AL_LOWPASS_GAINHF, 0.1f);
+                    AL10.alSourcei(source, EXTEfx.AL_DIRECT_FILTER, filter);
+                }
             }
         }
     }

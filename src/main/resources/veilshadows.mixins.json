@@ -5,11 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "veilshadows.refmap.json",
   "mixins": [
-
   ],
   "client": [
     "client.ChannelAccessor",
     "client.ChannelHandleAccessor",
+    "client.GameRendererMixin",
+    "client.LevelRendererMixin",
     "client.PostChainMixin",
     "client.SoundEngineMixin"
   ],
