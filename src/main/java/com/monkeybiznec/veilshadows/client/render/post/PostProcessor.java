@@ -106,7 +106,7 @@ public class PostProcessor {
         @SubscribeEvent
         public static void onAddReloadListener(@NotNull AddReloadListenerEvent event) {
             event.addListener((ResourceManagerReloadListener) resourceManager -> {
-              //  PostProcessor.getInstance().initialize();
+                PostProcessor.getInstance().initialize();
             });
         }
     }
