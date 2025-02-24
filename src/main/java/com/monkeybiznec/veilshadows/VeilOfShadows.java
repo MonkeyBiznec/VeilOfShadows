@@ -1,6 +1,7 @@
 package com.monkeybiznec.veilshadows;
 
-import com.monkeybiznec.veilshadows.client.render.post.PostProcessor;
+import com.monkeybiznec.veilshadows.client.model.VSLayers;
+import com.monkeybiznec.veilshadows.core.init.VSEntityTypes;
 import com.monkeybiznec.veilshadows.core.proxy.VSClientProxy;
 import com.monkeybiznec.veilshadows.core.proxy.VSCommonProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,7 +23,9 @@ public class VeilOfShadows {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::onCommonSetup);
         bus.addListener(this::onClientSetup);
-        PROXY.commonInitialize();
+        bus.addListener(VSLayers::register);
+        VSEntityTypes.ENTITY_TYPES.register(bus);
+        PROXY.commonInit();
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -32,7 +35,7 @@ public class VeilOfShadows {
 
     private void onClientSetup(@NotNull final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            PROXY.clientInitialize();
+            PROXY.clientInit();
         });
     }
 }

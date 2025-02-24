@@ -1,11 +1,11 @@
 package com.monkeybiznec.veilshadows.core.proxy;
 
 public class VSCommonProxy {
-    public void commonInitialize() {
+    public void commonInit() {
 
     }
 
-    public void clientInitialize() {
+    public void clientInit() {
 
     }
 }
