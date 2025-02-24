@@ -1,5 +1,6 @@
 package com.monkeybiznec.veilshadows;
 
+import com.monkeybiznec.veilshadows.client.render.post.PostProcessor;
 import com.monkeybiznec.veilshadows.core.proxy.VSClientProxy;
 import com.monkeybiznec.veilshadows.core.proxy.VSCommonProxy;
 import net.minecraftforge.common.MinecraftForge;

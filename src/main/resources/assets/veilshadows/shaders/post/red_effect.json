@@ -12,13 +12,7 @@
     {
       "name": "blit",
       "intarget": "temp",
-      "outtarget": "minecraft:main",
-      "uniforms": [
-        {
-          "name": "ColorModulate",
-          "values": [ 1.0, 0.0, 0.0, 1.0 ]
-        }
-      ]
+      "outtarget": "minecraft:main"
     }
   ]
 }

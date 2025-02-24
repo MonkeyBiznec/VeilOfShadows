@@ -2,16 +2,17 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.monkeybiznec.veilshadows.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "veilshadows.refmap.json",
   "mixins": [
   ],
   "client": [
-    "client.ChannelAccessor",
-    "client.ChannelHandleAccessor",
+    "accessor.ChannelAccessor",
+    "accessor.ChannelHandleAccessor",
+    "accessor.EffectInstanceAccessor",
     "client.GameRendererMixin",
     "client.LevelRendererMixin",
-    "client.PostChainMixin",
+    "accessor.PostChainAccessor",
     "client.SoundEngineMixin"
   ],
   "injectors": {

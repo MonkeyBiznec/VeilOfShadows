@@ -1,14 +1,12 @@
 package com.monkeybiznec.veilshadows.mixin.client;
 
 import com.mojang.blaze3d.audio.Channel;
-import net.minecraft.client.Minecraft;
+import com.monkeybiznec.veilshadows.mixin.accessor.ChannelAccessor;
+import com.monkeybiznec.veilshadows.mixin.accessor.ChannelHandleAccessor;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.openal.EXTEfx;

@@ -26,6 +26,7 @@ public class VSClientProxy extends VSCommonProxy {
         bus.addListener(this::onRegisterShaders);
         PostEffectManager.initAll();
         PostProcessor.getInstance().initialize();
+        PostProcessor.Config.saveEffects(PostProcessor.getInstance().getRegistry());
     }
 
     private void onRegisterShaders(RegisterShadersEvent event) {

@@ -1,11 +1,14 @@
-package com.monkeybiznec.veilshadows.client.render.post;
+package com.monkeybiznec.veilshadows.client.render.post.effect;
 
+import com.monkeybiznec.veilshadows.client.render.post.PostEffect;
 import com.monkeybiznec.veilshadows.core.util.ResourceUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class Red implements PostEffect {
+    public static final ResourceLocation SHADER = ResourceUtils.modLoc("shaders/post/red_effect.json");
+
     @Override
     public int getPriority(@NotNull Player player) {
         return 1;
@@ -18,7 +21,7 @@ public class Red implements PostEffect {
 
     @Override
     public @NotNull ResourceLocation getPostShader() {
-        return ResourceUtils.modLoc("shaders/post/red_effect.json");
+        return SHADER;
     }
 
     @Override

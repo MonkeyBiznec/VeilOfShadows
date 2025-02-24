@@ -1,4 +1,4 @@
-package com.monkeybiznec.veilshadows.mixin.client;
+package com.monkeybiznec.veilshadows.mixin.accessor;
 
 import com.mojang.blaze3d.audio.Channel;
 import net.minecraft.client.sounds.ChannelAccess;
